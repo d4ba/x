@@ -68,6 +68,8 @@ local MiscTab = Window:CreateTab("Miscellaneous", 4483362458)
 
 -- spamchat tab
 do
+    local Section = SpamChatTab:CreateSection("If it doesnt send a chat msg go to Miscellaneous tab and change the chat channel")
+
     local SpamChatToggle = SpamChatTab:CreateToggle({
         Name = "Activate Spam Chat",
         CurrentValue = false,
@@ -243,4 +245,10 @@ do
             currentchannel = unpack(Option)
         end,
     })
+    local Destroy = MiscTab:CreateButton({
+        Name = "Destroy GUI",
+        Callback = function()
+            Rayfield:Destroy()
+        end,
+     })
 end
