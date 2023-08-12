@@ -64,6 +64,7 @@ end
 
 local SpamChatTab = Window:CreateTab("Spam Chat", 4483362458)
 local CussWordsTab = Window:CreateTab("Cuss Words", 11640126822)
+local MiscTab = Window:CreateTab("Miscellaneous", 4483362458)
 
 -- spamchat tab
 do
@@ -125,16 +126,6 @@ do
             currentspamchatspeed = tonumber(Text)
         end,
     })
-    local ChatOptions = Tab:CreateDropdown({
-        Name = "Chatting Channel (some games dont support 'All' channel)",
-        Options = {"All","normalchat"},
-        CurrentOption = {"All"},
-        MultipleOptions = false,
-        Flag = "ChattingChannel", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-        Callback = function(Option)
-            currentchannel = Option
-        end,
-     })
 end
 
 
@@ -145,7 +136,7 @@ do
         Callback = function()
             local args = {
                 [1] = "p3n1x",
-                [2] = "All"
+                [2] = currentchannel
             }
             
             game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
@@ -156,7 +147,7 @@ do
         Callback = function()
             local args = {
                 [1] = "Rapa me",
-                [2] = "All"
+                [2] = currentchannel
             }
             
             game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
@@ -167,7 +158,7 @@ do
         Callback = function()
             local args = {
                 [1] = "Rapa",
-                [2] = "All"
+                [2] = currentchannel
             }
             
             game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
@@ -178,7 +169,7 @@ do
         Callback = function()
             local args = {
                 [1] = "BigAssGuy",
-                [2] = "All"
+                [2] = currentchannel
             }
             
             game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
@@ -189,7 +180,7 @@ do
         Callback = function()
             local args = {
                 [1] = "I watch adoptmesextape",
-                [2] = "All"
+                [2] = currentchannel
             }
             
             game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
@@ -200,7 +191,7 @@ do
         Callback = function()
             local args = {
                 [1] = "adoptmesextape",
-                [2] = "All"
+                [2] = currentchannel
             }
             
             game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
@@ -211,7 +202,7 @@ do
         Callback = function()
             local args = {
                 [1] = "Mafaka",
-                [2] = "All"
+                [2] = currentchannel
             }
             
             game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
@@ -222,7 +213,7 @@ do
         Callback = function()
             local args = {
                 [1] = "Fak",
-                [2] = "All"
+                [2] = currentchannel
             }
             
             game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
@@ -233,10 +224,23 @@ do
         Callback = function()
             local args = {
                 [1] = "Coems",
-                [2] = "All"
+                [2] = currentchannel
             }
             
             game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+        end,
+    })
+end
+
+do
+    local ChatOptions = MiscTab:CreateDropdown({
+        Name = "Chatting Channel",
+        Options = {"All","normalchat"},
+        CurrentOption = {"All"},
+        MultipleOptions = false,
+        Flag = "ChattingChannel", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+        Callback = function(Option)
+            currentchannel = unpack(Option)
         end,
     })
 end
