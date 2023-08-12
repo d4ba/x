@@ -1,6 +1,8 @@
 local currentspamchat = "Hello"
 local currentspamchatspeed = 1
 local currentspamchatvalue = false
+local currentversion = loadstring(game:HttpGet('https://raw.githubusercontent.com/d4ba/x/main/version24bl.lua'))()
+local currentchannel = "All"
 
 local function getexploit()
     local exploit =
@@ -8,18 +10,17 @@ local function getexploit()
         (secure_load and "Sentinel") or
         (is_sirhurt_closure and "Sirhurt") or
         (pebc_execute and "ProtoSmasher") or
-        (KRNL_LOADED and "KRNL") or
+        (KRNL_LOADED and "Krnl") or
         (unit and not syn and "Unit") or
         (IsElectron and "Electron") or
-        (Fluxus and "Fluxus") or
-        ("Unsupported")
+        ("Unsupported / Fluxus / Unknown")
   
     return exploit
 end
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
-    Name = "Chat stuff - "..getexploit(),
+    Name = "Chat stuff "..currentversion.." - "..getexploit(),
     LoadingTitle = "Chat Stuff",
     LoadingSubtitle = "stupid and useful tool",
     ConfigurationSaving = {
@@ -35,7 +36,7 @@ local Window = Rayfield:CreateWindow({
     KeySystem = true, -- Set this to true to use our key system
     KeySettings = {
        Title = "Chat Stuff Key system",
-       Subtitle = "A",
+       Subtitle = "get key i guess",
        Note = "Message .Dan#8344 on discord for key",
        FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
        SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
@@ -47,7 +48,7 @@ local Window = Rayfield:CreateWindow({
 if getexploit() == "Unsupported" then
     Rayfield:Notify({
         Title = "Unsupported",
-        Content = "Your Executor/Exploit '"..getexploit().."' is not supported, you might expeirience issues.",
+        Content = "Your Executor/Exploit '"..(Fluxus and "Fluxus") or ("Unknown").."' is not supported, you might expeirience issues.",
         Duration = 6.5,
         Image = 4483362458,
         Actions = { -- Notification Buttons
@@ -91,7 +92,7 @@ do
                 while currentspamchatvalue == true do
                     local args = {
                         [1] = currentspamchat,
-                        [2] = "All"
+                        [2] = currentchannel
                     }
                     
                     game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
@@ -124,6 +125,16 @@ do
             currentspamchatspeed = tonumber(Text)
         end,
     })
+    local ChatOptions = Tab:CreateDropdown({
+        Name = "Chatting Channel (some games dont support 'All' channel)",
+        Options = {"All","normalchat"},
+        CurrentOption = {"All"},
+        MultipleOptions = false,
+        Flag = "ChattingChannel", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+        Callback = function(Option)
+            currentchannel = Option
+        end,
+     })
 end
 
 
