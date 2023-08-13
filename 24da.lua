@@ -13,7 +13,8 @@ local function getexploit()
         (KRNL_LOADED and "Krnl") or
         (unit and not syn and "Unit") or
         (IsElectron and "Electron") or
-        ("Unsupported / Fluxus / Unknown")
+        (Fluxus and "Fluxus (unsupported)") or
+        ("Unsupported / Unknown")
   
     return exploit
 end
@@ -45,19 +46,22 @@ local Window = Rayfield:CreateWindow({
     }
 })
 
-if getexploit() == "Unsupported" then
+if getexploit() == "Fluxus (unsupported)" then
     Rayfield:Notify({
         Title = "Unsupported",
-        Content = "Your Executor/Exploit '"..(Fluxus and "Fluxus") or ("Unknown").."' is not supported, you might expeirience issues.",
+        Content = "Your Executor/Exploit 'Fluxus' is not supported, you might expeirience issues.",
         Duration = 6.5,
         Image = 4483362458,
         Actions = { -- Notification Buttons
-           Ignore = {
-              Name = "Understood.",
-              Callback = function()
-                 print("")
-              end
-            }
+        },
+    })
+elseif getexploit() == "Unsupported / Unknown" then
+    Rayfield:Notify({
+        Title = "Unsupported",
+        Content = "Your Executor/Exploit  is not supported, you might expeirience issues.",
+        Duration = 6.5,
+        Image = 4483362458,
+        Actions = { -- Notification Buttons
         },
     })
 end
@@ -68,7 +72,7 @@ local MiscTab = Window:CreateTab("Miscellaneous", 4483362458)
 
 -- spamchat tab
 do
-    local Section = SpamChatTab:CreateSection("If it doesnt send a chat msg go to Miscellaneous tab and change the chat channel")
+    local Label = Tab:CreateLabel("if it's not sending messages go to misc and change the chatting channel")
 
     local SpamChatToggle = SpamChatTab:CreateToggle({
         Name = "Activate Spam Chat",
@@ -83,12 +87,7 @@ do
                 Duration = 6.5,
                 Image = 1395859740,
                 Actions = { -- Notification Buttons
-                   Ignore = {
-                      Name = "Okay",
-                      Callback = function()
-                          print()
-                      end
-                    }
+                   
                 },
             })
             currentspamchatvalue = true
@@ -248,6 +247,7 @@ do
     local Destroy = MiscTab:CreateButton({
         Name = "Destroy GUI",
         Callback = function()
+            SpamChatToggle:Set(false)
             Rayfield:Destroy()
         end,
      })
