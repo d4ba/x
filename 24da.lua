@@ -29,7 +29,7 @@ local Window = Rayfield:CreateWindow({
     LoadingSubtitle = "stupid and useful tool",
     ConfigurationSaving = {
        Enabled = true,
-       FolderName = nil, -- Create a custom folder for your hub/game
+       FolderName = "ChatStuffFolder", -- Create a custom folder for your hub/game
        FileName = "ChatStuff"
     },
     Discord = {
