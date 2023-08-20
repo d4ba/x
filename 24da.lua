@@ -3,6 +3,9 @@ local currentspamchatspeed = 1
 local currentspamchatvalue = false
 local currentversion = loadstring(game:HttpGet('https://raw.githubusercontent.com/d4ba/x/main/version24bl.lua'))()
 local currentchannel = "All"
+local currentFlagChat = "Hello"
+local currentFlagSpeed= 1
+local currentsFlagValue = false
 
 local function getexploit()
     local exploit =
@@ -13,7 +16,7 @@ local function getexploit()
         (KRNL_LOADED and "Krnl") or
         (unit and not syn and "Unit") or
         (IsElectron and "Electron") or
-        (Fluxus and "Fluxus (unsupported)") or
+        (Fluxus and "Fluxus") or
         ("Unsupported / Unknown")
   
     return exploit
@@ -46,13 +49,19 @@ local Window = Rayfield:CreateWindow({
     }
 })
 
-if getexploit() == "Fluxus (unsupported)" then
+if getexploit() == "Fluxus" then
     Rayfield:Notify({
         Title = "Notice",
         Content = "Your executor/exploit Fluxus is kinda supported, some issues may happen.",
         Duration = 6.5,
         Image = 4483362458,
         Actions = { -- Notification Buttons
+            Okay = {
+                Name = "Ok",
+                Callback = function()
+                    print("ok")
+                end
+            }
         },
     })
 elseif getexploit() == "Unsupported / Unknown" then
@@ -62,12 +71,20 @@ elseif getexploit() == "Unsupported / Unknown" then
         Duration = 6.5,
         Image = 4483362458,
         Actions = { -- Notification Buttons
+                Okay = {
+                    Name = "Ok",
+                    Callback = function()
+                        print("okay")
+                    end
+               }
         },
     })
 end
 
 local SpamChatTab = Window:CreateTab("Spam Chat", 4483362458)
 local CussWordsTab = Window:CreateTab("Cuss Words", 11640126822)
+local KeybindsTab = Window:CreateTab("Keybinds", 4483362458)
+local ChatFlooderTab = Window:CreateTab("Chat Flooder", 4483362458)
 local MiscTab = Window:CreateTab("Miscellaneous", 4483362458)
 
 
@@ -84,7 +101,12 @@ local SpamChatToggle = SpamChatTab:CreateToggle({
             Duration = 6.5,
             Image = 1395859740,
             Actions = { -- Notification Buttons
-               
+               Okay = {
+                    Name = "Ok",
+                    Callback = function()
+                        print("okay")
+                    end
+               }
             },
         })
         currentspamchatvalue = true
@@ -249,8 +271,32 @@ do
     local Destroy = MiscTab:CreateButton({
         Name = "Destroy GUI",
         Callback = function()
-            SpamChatToggle:Set(false)
+            Rayfield:Destroy()
+        end,
+     })
+     local SpamChatKeybind = KeybindsTab:CreateKeybind({
+        Name = "Activate Spam Chat Keybind",
+        CurrentKeybind = "Q",
+        HoldToInteract = false,
+        Flag = "SpamChatKeybind", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+        Callback = function(Keybind)
+            if currentspamchatvalue == false then
+                SpamChatToggle:Set(true)
+            else
+                SpamChatToggle:Set(false)
+            end
+        end,
+     })
+     local DestroyGUIKeybind = KeybindsTab:CreateKeybind({
+        Name = "Destroy GUI Keybind",
+        CurrentKeybind = "Z",
+        HoldToInteract = false,
+        Flag = "SpamChatKeybind", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+        Callback = function(Keybind)
             Rayfield:Destroy()
         end,
      })
 end
+
+
+Rayfield:LoadConfiguration()
