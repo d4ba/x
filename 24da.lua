@@ -34,7 +34,7 @@ local Window = Rayfield:CreateWindow({
     },
     Discord = {
        Enabled = true,
-       Invite = "a", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+       Invite = "y3EhBavqhZ", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
        RememberJoins = false -- Set this to false to make them join the discord every time they load it up
     },
     KeySystem = true, -- Set this to true to use our key system
