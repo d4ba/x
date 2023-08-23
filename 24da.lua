@@ -16,7 +16,7 @@ local function getexploit()
         (KRNL_LOADED and "Krnl") or
         (unit and not syn and "Unit") or
         (IsElectron and "Electron") or
-        (Fluxus and "Fluxus") or
+        (Fluxus and "Fluxus (unsupported)") or
         ("Unsupported / Unknown")
   
     return exploit
@@ -29,12 +29,12 @@ local Window = Rayfield:CreateWindow({
     LoadingSubtitle = "stupid and useful tool",
     ConfigurationSaving = {
        Enabled = true,
-       FolderName = "ChatStuffFolder", -- Create a custom folder for your hub/game
+       FolderName = nil, -- Create a custom folder for your hub/game
        FileName = "ChatStuff"
     },
     Discord = {
        Enabled = true,
-       Invite = "y3EhBavqhZ", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+       Invite = "a", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
        RememberJoins = false -- Set this to false to make them join the discord every time they load it up
     },
     KeySystem = true, -- Set this to true to use our key system
@@ -45,11 +45,11 @@ local Window = Rayfield:CreateWindow({
        FileName = "ChatStuffKeySystem040423", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
        SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
        GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-       Key = {"ChatStuff30dkla2"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+       Key = {"Key-L2K00SLFK"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
     }
 })
 
-if getexploit() == "Fluxus" then
+if getexploit() == "Fluxus (unsupported)" then
     Rayfield:Notify({
         Title = "Notice",
         Content = "Your executor/exploit Fluxus is kinda supported, some issues may happen.",
@@ -71,12 +71,6 @@ elseif getexploit() == "Unsupported / Unknown" then
         Duration = 6.5,
         Image = 4483362458,
         Actions = { -- Notification Buttons
-                Okay = {
-                    Name = "Ok",
-                    Callback = function()
-                        print("okay")
-                    end
-               }
         },
     })
 end
@@ -101,12 +95,7 @@ local SpamChatToggle = SpamChatTab:CreateToggle({
             Duration = 6.5,
             Image = 1395859740,
             Actions = { -- Notification Buttons
-               Okay = {
-                    Name = "Ok",
-                    Callback = function()
-                        print("okay")
-                    end
-               }
+               
             },
         })
         currentspamchatvalue = true
