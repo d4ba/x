@@ -1,13 +1,16 @@
+local currentflaggedplayer
 game.Players.LocalPlayer.Chatted:Connect(function(msg)
     local actions = {
         flag = {
             Name = "Flag Person",
             Callback = function(userid: number)
                 local player = game:GetService("Players"):GetPlayerByUserId(userid)
+                currentflaggedplayer = player
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame
                 game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Hello ["..player.DisplayName.."] or ["..player.Name.."], you have been flagged from "..game.Players.LocalPlayer.Name..". You will be recorded and the video will be sent to Flagging Services™.","normalchat")
             end
-        }
+        },
+
     }
 
     local ranodm = math.random(1,1000)
@@ -57,6 +60,13 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                     break
                 end
             end
+        end
+        if split[1] == "/goback" then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = currentflaggedplayer.Character.HumanoidRootPart.CFrame
+        end
+        if split[1] == "/rejoin" then
+            local jobid = game.JobId
+            game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, jobid, game.Players.LocalPlayer)
         end
     end
 end)
