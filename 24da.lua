@@ -4,7 +4,7 @@ local currentspamchatvalue = false
 local currentversion = loadstring(game:HttpGet('https://raw.githubusercontent.com/d4ba/x/main/version24bl.lua'))()
 local currentchannel = "All"
 local currentFlagChat = "Hello"
-local currentFlagSpeed= 1
+local currentFlagSpeed= 5
 local currentsFlagValue = false
 
 local function getexploit()
@@ -16,7 +16,7 @@ local function getexploit()
         (KRNL_LOADED and "Krnl") or
         (unit and not syn and "Unit") or
         (IsElectron and "Electron") or
-        (Fluxus and "Fluxus (unsupported)") or
+        (Fluxus and "Fluxus") or
         ("Unsupported / Unknown")
   
     return exploit
@@ -49,7 +49,7 @@ local Window = Rayfield:CreateWindow({
     }
 })
 
-if getexploit() == "Fluxus (unsupported)" then
+if getexploit() == "Fluxus" then
     Rayfield:Notify({
         Title = "Notice",
         Content = "Your executor/exploit Fluxus is kinda supported, some issues may happen.",
