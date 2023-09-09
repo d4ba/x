@@ -1,5 +1,7 @@
 local creator = {}
 
+getgenv().fakemm2roles = {}
+
 local uis = game:GetService("UserInputService")
 
 function creator.createRole(options)
@@ -9,7 +11,11 @@ function creator.createRole(options)
         game.Players.LocalPlayer.PlayerGui.MainGUI.Game.RoleSelector.Chance.Text = options.ChanceText
     end)
     print(success)
+    if table.find(getgenv().fakemm2roles,options) then
+        warn("Fake MM2 Role Maker: There's a fake mm2 role that has the same properties, Could not make role.")
+    end
     if success then
+        table.insert(getgenv().fakemm2roles,options)
         uis.InputBegan:Connect(function(input, gpe)
             if gpe then return end
             if options.KeyCode == nil then
