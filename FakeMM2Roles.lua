@@ -1,3 +1,16 @@
+print()
+print()
+print("Fake MM2 ROLES:")
+print()
+print("Press J: Traitor")
+print("Press L: Revenger")
+print("Press M: Banana Cat")
+print("Press N: Innocent?")
+print("Press X: Sheriff?")
+print("Press V: Corruption")
+print()
+print()
+
 local uis = game:GetService("UserInputService")
 
 uis.InputBegan:Connect(function(input, gameProcessedEvent)
@@ -35,14 +48,3 @@ uis.InputBegan:Connect(function(input, gameProcessedEvent)
         game.Players.LocalPlayer.PlayerGui.MainGUI.Game.RoleSelector.Chance.Text = "Nil"
     end
 end)
-
-print([[
-    Fake MM2 Roles:
-
-    Press J: Traitor
-    Press L: Revenger
-    Press M: Banana Cat
-    Press N: Innocent?
-    Press X: Sheriff?
-    Press V: Corruption
-]])
