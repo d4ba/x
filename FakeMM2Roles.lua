@@ -35,3 +35,14 @@ uis.InputBegan:Connect(function(input, gameProcessedEvent)
         game.Players.LocalPlayer.PlayerGui.MainGUI.Game.RoleSelector.Chance.Text = "Nil"
     end
 end)
+
+print([[
+    Fake MM2 Roles:
+
+    Press J: Traitor
+    Press L: Revenger
+    Press M: Banana Cat
+    Press N: Innocent?
+    Press X: Sheriff?
+    Press V: Corruption
+]])
