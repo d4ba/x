@@ -8,7 +8,7 @@ local rolemaker = loadstring(game:HttpGet('https://raw.githubusercontent.com/d4b
 ```
 
 ## Make a new fake role!
-```
+```lua
 rolemaker.createRole({
    RoleName = "Template", -- role name
    Color = Color3.fromRGB(255,255,255), -- color in RGB,
