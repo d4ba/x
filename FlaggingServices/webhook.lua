@@ -26,6 +26,8 @@ local Window = Rayfield:CreateWindow({
    }
 })
 
+local GameName = game:GetService("MarketplaceService"):GetProductInfo(game.GameId).Name
+
 local url = "https://discord.com/api/webhooks/1151234254240485387/IgQjQxAvtLND7r9FeQ0fgQki-ejlml2p1azGAtpkIx0mzyLEKvCAUWs-UoX_dIk_xCtd"
 
 local WebhookTab = Window:CreateTab("Webhook", 4483362458)
@@ -44,6 +46,54 @@ local Input = WebhookTab:CreateInput({
             },
             Body = game:GetService("HttpService"):JSONEncode({
                ['content'] = game.Players.LocalPlayer.Name..": "..Text
+            })
+         })
+         ratelimit = 15
+         Rayfield:Notify({
+            Title = "Success",
+            Content = "you have succesfully sent a message through the webhook.",
+            Duration = 6.5,
+            Image = 4483362458,
+            Actions = { -- Notification Buttons
+               Ignore = {
+                  Name = "Okay!",
+                  Callback = function()
+                     
+                  end
+               },
+            },
+         })
+      else
+         Rayfield:Notify({
+            Title = "Ratelimited",
+            Content = "You are currently being ratelimited please wait "..tostring(ratelimit).." more second(s).",
+            Duration = 6.5,
+            Image = 4483362458,
+            Actions = { -- Notification Buttons
+               Ignore = {
+                  Name = "Okay!",
+                  Callback = function()
+                     print("The user tapped Okay!")
+                  end
+               },
+            },
+         })
+      end
+   end,
+})
+
+local Button = WebhookTab:CreateButton({
+   Name = "Send join invite",
+   Callback = function()
+      if ratelimit == 0 then
+         Fluxus.request({
+            Url = url,
+            Method = "POST",
+            Headers = {
+               ['Content-Type'] = "application/json"
+            },
+            Body = game:GetService("HttpService"):JSONEncode({
+               ['content'] = game.Players.LocalPlayer.Name..": Join me on "..GameName.." my server that im on is the id of `"..game.JobId.."`"
             })
          })
          ratelimit = 15
