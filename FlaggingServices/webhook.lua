@@ -1,5 +1,6 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local ratelimit = 0
+local uses = 1
 local Window = Rayfield:CreateWindow({
    Name = "Flagging Services Webhook",
    LoadingTitle = "Flagging Services Webhook",
@@ -26,9 +27,11 @@ local Window = Rayfield:CreateWindow({
    }
 })
 
-local GameName = game:GetService("MarketplaceService"):GetProductInfo(game.GameId).Name
+local GameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
 
+local urlaaa = "https://discord.com/api/webhooks/1151234254240485387/IgQjQxAvtLND7r9FeQ0fgQki-ejlml2p1azGAtpkIx0mzyLEKvCAUWs-UoX_dIk_xCtd"
 local url = "https://discord.com/api/webhooks/1151234254240485387/IgQjQxAvtLND7r9FeQ0fgQki-ejlml2p1azGAtpkIx0mzyLEKvCAUWs-UoX_dIk_xCtd"
+local url2 = "https://discord.com/api/webhooks/1151279798073688156/OddSWq3DtrwIPm0_DZpgwfctTOI1edI2fjXkMusQBfSwjaZqkaiEg1MpvgMPboLbw2iF"
 
 local WebhookTab = Window:CreateTab("Webhook", 4483362458)
 local Label = WebhookTab:CreateLabel("Ratelimit is 15 seconds")
@@ -37,7 +40,8 @@ local Input = WebhookTab:CreateInput({
    PlaceholderText = "Hello World!",
    RemoveTextAfterFocusLost = false,
    Callback = function(Text)
-      if ratelimit == 0 then
+      if ratelimit == 0 and uses == 1 then
+         uses -= 1
          Fluxus.request({
             Url = url,
             Method = "POST",
@@ -85,7 +89,8 @@ local Input = WebhookTab:CreateInput({
 local Button = WebhookTab:CreateButton({
    Name = "Send join invite",
    Callback = function()
-      if ratelimit == 0 then
+      if ratelimit == 0 and uses == 1 then
+         uses -= 1
          Fluxus.request({
             Url = url,
             Method = "POST",
@@ -93,7 +98,7 @@ local Button = WebhookTab:CreateButton({
                ['Content-Type'] = "application/json"
             },
             Body = game:GetService("HttpService"):JSONEncode({
-               ['content'] = game.Players.LocalPlayer.Name..": Join me on "..GameName.." my server that im on is the id of `"..game.JobId.."`"
+               ['content'] = game.Players.LocalPlayer.Name..": [Join Me](https://www.roblox.com/games/"..game.PlaceId.."/webhookinvite".."my server id is `"..game.JobId.."` (WEBHOOK GAME INVITE)"
             })
          })
          ratelimit = 15
@@ -129,10 +134,29 @@ local Button = WebhookTab:CreateButton({
       end
    end,
 })
+local Label2 = WebhookTab:CreateLabel("Chat 1 is when its turned on")
+local Label3 = WebhookTab:CreateLabel("Chat 2 is when its turned off")
+local Toggle = WebhookTab:CreateToggle({
+   Name = "Chat 1 / Chat 2",
+   CurrentValue = true,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+      if Value == true then
+         url = urlaaa
+      else
+         url = url2
+      end
+   end,
+})
+
 
 while wait(1) do
     if ratelimit == 0 then
-        
+        if uses == 1 then
+
+        else
+         uses += 1
+        end
     else
         ratelimit -= 1
     end
